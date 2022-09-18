@@ -26,7 +26,7 @@ router.post('/departments',({body},res)=>{
         }
         res.json({
             message:"Success",
-            data:results.affectedRows
+            data:body
         })
     })
 })
