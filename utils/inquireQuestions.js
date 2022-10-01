@@ -1,10 +1,10 @@
 const inquire = require("inquirer");
 
-const Employee = require('../utils/employeeInteractions')
-
+const { allEmployee, addEmployee ,updateEmployeeRole} = require("../utils/employeeInteractions");
+const { allRoles, addRoles } = require("../utils/roleInteractions");
 
 const initialQuestion = () => {
-  console.log("------------------------------------------")
+  console.log("------------------------------------------");
   inquire
     .prompt([
       {
@@ -18,46 +18,44 @@ const initialQuestion = () => {
           "View All Roles",
           "Add Role",
           "View All Departments",
-          "Add Department"
+          "Add Department",
         ],
       },
     ])
-    .then((answers) => {
-        console.log(answers.actionSelection);
-        switch(answers.actionSelection){
-            case "View All Employees":
-                Employee.allEmployee();
-                initialQuestion();
-                break;
-            case "Add Employee":
-                Employee.addEmployee();
-                initialQuestion();
-                break
-            case "Update Employee Role":
-                Employee.updateEmployeeRole();
-                initialQuestion();
-                break;
-            case "View All Roles":
-                Roles.viewRoles();
-                initialQuestion();
-                break;
-            case "Add Role":
-                Roles.addRole();
-                initialQuestion()
-                break;
-                
-            case "View All Departments":
-                Department.viewDepartments()
-                initialQuestion();
-                break;
-              
-            case "Add Department":
-                Department.addDepartment();
-                initialQuestion()
-                break;
-        }
+    .then(async (answers) => {
+      switch (answers.actionSelection) {
+        case "View All Employees":
+          await allEmployee();
+          initialQuestion();
+          break;
+        case "Add Employee":
+          await addEmployee();
+          initialQuestion();
+          break;
+        case "Update Employee Role":
+          await updateEmployeeRole();
+          initialQuestion();
+          break;
+        case "View All Roles":
+          await allRoles();
+          initialQuestion();
+          break;
+        case "Add Role":
+          await addRole();
+          initialQuestion();
+          break;
+
+        case "View All Departments":
+          await allDepartments();
+          initialQuestion();
+          break;
+
+        case "Add Department":
+          await addDepartment();
+          initialQuestion();
+          break;
+      }
     });
 };
 
-
-module.exports=initialQuestion
+module.exports = initialQuestion;
