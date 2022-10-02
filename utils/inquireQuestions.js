@@ -2,6 +2,7 @@ const inquire = require("inquirer");
 
 const { allEmployee, addEmployee ,updateEmployeeRole} = require("../utils/employeeInteractions");
 const { allRoles, addRoles } = require("../utils/roleInteractions");
+const {allDepartments,addDepartment} =require('../utils/departmentInteraction');
 
 const initialQuestion = () => {
   console.log("------------------------------------------");
@@ -41,7 +42,7 @@ const initialQuestion = () => {
           initialQuestion();
           break;
         case "Add Role":
-          await addRole();
+          await addRoles();
           initialQuestion();
           break;
 
