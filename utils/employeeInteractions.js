@@ -1,6 +1,36 @@
 const inquire= require("inquirer");
+const syncsql =require("sync-sql")
 const db = require("../db/connection");
+var output=[];
+var outputemp=[];
+var config ={
+  host:'localhost',
+  port:3306,
+  user:'root',
+  password:'Prototype@905',
+  database:'company'
+}
+const loadRoles=()=>{
+  const rolesQuery = `SELECT * FROM roles;`;
+  var returnArray =[];
+     output = syncsql.mysql(config,rolesQuery).data.rows
 
+    output.forEach((result)=>{
+        returnArray.push(result.title);
+    })
+    return returnArray
+}
+
+const loadEmployees =()=>{
+  const rolesQuery = `SELECT * FROM employee;`;
+  var returnArray =[];
+     outputemp = syncsql.mysql(config,rolesQuery).data.rows
+    
+    outputemp.forEach((result)=>{
+        returnArray.push(result.first_name + " "+ result.last_name);
+    })
+    return returnArray
+}
 const allEmployee = () => {
   const sql = "SELECT * FROM employee";
 
@@ -29,20 +59,24 @@ const addEmployee = async () => {
       message:"Employees last name ?"
     },
     {
-      type: "text",
+      type: "list",
       name: "roleId",
-      message:"Employes Role ?"
+      message:"Employes Role ?",
+      choices:await loadRoles()
     },
     {
-      type: "text",
+      type: "list",
       name: "manager",
-      message:"Enter the name of the manager ?"
+      message:"Who is the employee manager ?",
+      choices:await loadEmployees()
     }
   ])
   .then((results)=>{
+    results.roleId = output.find(element=>element.title==results.roleId);
+    results.manager = outputemp.find(result=>(result.first_name + " "+ result.last_name) ==results.manager);
     const sql = `INSERT INTO employee(first_name,last_name,role_id,manager_id) 
     VALUES(?,?,?,?)`;
-    const params =[results.firstName,results.lastName,results.roleId,results.manager];
+    const params =[results.firstName,results.lastName,results.roleId.id,results.manager.id];
    db.query(sql,params,(err,results)=>{
         if(err){
             console.log(err);
