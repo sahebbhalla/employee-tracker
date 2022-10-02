@@ -22,7 +22,7 @@ const loadRoles=()=>{
 }
 
 const loadEmployees =()=>{
-  const rolesQuery = `SELECT * FROM employee;`;
+  const rolesQuery = `SELECT *FROM employee`;
   var returnArray =[];
      outputemp = syncsql.mysql(config,rolesQuery).data.rows
     
@@ -32,7 +32,12 @@ const loadEmployees =()=>{
     return returnArray
 }
 const allEmployee = () => {
-  const sql = "SELECT * FROM employee";
+  const sql = `select e.id,e.first_name as FirstName, e.last_name as LastName, r.title as Role,emag.first_name as Manager
+   from employee e 
+   INNER JOIN roles r ON e.role_id=r.id
+   INNER JOIN employee emag ON e.id =emag.manager_id
+   
+   `;
 
   db.query(sql, (err, results) => {
     if (err) {
