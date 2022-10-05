@@ -10,6 +10,7 @@ var config = {
   password: "Prototype@905",
   database: "company",
 };
+
 const loadRoles = () => {
   const rolesQuery = `SELECT * FROM roles;`;
   var returnArray = [];
@@ -36,7 +37,6 @@ const allEmployee = () => {
    from employee e 
    INNER JOIN roles r ON e.role_id=r.id
    INNER JOIN department dep ON dep.id =r.department_id
-   
    `;
 
   db.query(sql, (err, results) => {
@@ -97,7 +97,7 @@ const addEmployee = async () => {
           console.log(err);
           return;
         }
-        console.log(results);
+       allEmployee()
       });
     });
 };
@@ -136,7 +136,7 @@ const updateEmployeeRole = async () => {
           console.log(err);
           return;
         }
-        console.log(results);
+        allEmployee()
       });
     });
 };

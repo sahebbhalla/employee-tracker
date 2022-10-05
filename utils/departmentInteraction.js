@@ -33,7 +33,7 @@ const addDepartment =async () => {
               console.log(err);
               return;
             }
-            console.log(results.affectedRows);
+            allDepartments();
       })
    
     });

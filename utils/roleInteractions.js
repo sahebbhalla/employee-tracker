@@ -72,7 +72,7 @@ const addRoles = async () => {
           console.log(err);
           return;
         }
-        console.log("Role Added");
+        allRoles()
       });
     });
 };
