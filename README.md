@@ -1,22 +1,20 @@
-# employee-tracker
-
-This application is a CLI based Employee tracking application
+# Tech-newz
+This application is an ecommerce platform that provides API endpoint to add Products, Categories and Product Tags 
 
 ## Features
 This application allows you to
-Add Employee
-Add Departments
-Add Roles 
+Add Products
+Add Categories
+Add Product Tags
 
-You can update Roles
-This app also provides API endpoint for you to integrate data into other platforms your company might be using 
+
 
 ## Core technology 
 
-This App uses Seaquilize to make Databse connections and CRUD operations 
+This App uses mysql2 to make Databse connections and CRUD operations 
 Express JS is used to make ApI endpoints available 
 
 ## using Application
 
-You can install teh application by navigating to the installed folder and running NPM I 
+You can install the application by navigating to the installed folder and running NPM I 
 After the app is installed Run NPM start 
